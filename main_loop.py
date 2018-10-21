@@ -1,25 +1,5 @@
 class fp(object):
-    """
-    The RAW IMU readings for the usual 9DOF sensor setup. 
-    This contains the true raw values without any scaling to allow data capture and system debugging.
-    
-    The message definition is here: https://pixhawk.ethz.ch/mavlink/#RAW_IMU
-    
-    :param time_boot_us: Timestamp (microseconds since system boot). #Note, not milliseconds as per spec
-    :param xacc: X acceleration (mg)
-    :param yacc: Y acceleration (mg)
-    :param zacc: Z acceleration (mg)
-    :param xgyro: Angular speed around X axis (millirad /sec)
-    :param ygyro: Angular speed around Y axis (millirad /sec)
-    :param zgyro: Angular speed around Z axis (millirad /sec)
-    :param xmag: X Magnetic field (milli tesla)
-    :param ymag: Y Magnetic field (milli tesla)
-    :param zmag: Z Magnetic field (milli tesla)    
-    """
     def __init__(self, north, east, alt, vel, leg, maxGs, rph, successRadius, wayp=None):
-        """
-        RawIMU object constructor.
-        """
         self.north = north
         self.east = east
         self.alt = alt
