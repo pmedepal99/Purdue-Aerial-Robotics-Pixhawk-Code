@@ -1,5 +1,7 @@
+import random
+
 class fp(object):
-    def __init__(self, north, east, alt, vel, leg, maxGs, rph, successRadius, wayp=None):
+    def __init__(self, north=None, east=None, alt=None, vel=None, leg=None, maxGs=None, rph=None, successRadius=None, wayp=None):
         self.north = north
         self.east = east
         self.alt = alt
@@ -9,9 +11,6 @@ class fp(object):
         self.rph = rph
         self.successRadius = successRadius
         self.wayp = []
-
-curLoc = [0, 0, 0] #x, y, z
-curWayp = [100, 100, 100]
 
 def calcDist3D(curLoc, curWayp):
     return 0
@@ -33,23 +32,30 @@ def getNewACState(fp, curState, curLoc):
     newState = [newVel, newRoll, newPitch, newHdg]
     newLoc = updateACPos(curLoc, newState)
 
-temp = fp(1, 2, 3, 4, 5, 6, 7, 8)
+def generateRandomWaypoints():
+    list_of_waypoints = []
+    for i in range(4):
+        #north, east, alt
+        tmp = [random.randint(-100, 100), random.randint(-100, 100), random.randint(-100, 100)]
+        list_of_waypoints.append(tmp)
+    return list_of_waypoints
+
+temp = fp()
 temp.north = [0, 0, 100, 0]
 temp.east = [0, 100, 100, 0]
 temp.alt = [0, 100, 50, 0]
 temp.vel = [20, 20, 20, 20]
 temp.rph = [1, 1, 1]
-temp.wayp = [[100, 100, 100], [100, 100, 200]]
+temp.wayp = generateRandomWaypoints()
 temp.leg = 0
 temp.maxGs = 50
 temp.successRadius = 5
 
-print temp.alt
-
 iteration_num = 100
 
-curState = [0, temp.leg, temp.vel[0], temp.rph, temp.wayp[0]]
-
+curState = [0, 0, 0, 0] #velocity, roll, pitch, heading
+curWayp = temp.wayp[0]
+curLoc = [0, 0, 0] #posX, posY, alt
 c = 0
 while c < iteration_num:
 
